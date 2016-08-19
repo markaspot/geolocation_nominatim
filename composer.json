@@ -1,0 +1,14 @@
+{
+  "name": "drupal/geolocation_nominatim",
+  "type": "drupal-module",
+  "description": "A Nominatim based geocoder and widget for geolocation.",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/geolocation_nominatim",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/geolocation_nominatim",
+    "source": "http://cgit.drupalcode.org/geolocation_nominatim"
+  },
+  "require": { }
+}
