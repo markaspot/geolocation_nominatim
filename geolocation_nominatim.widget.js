@@ -54,17 +54,27 @@
             updateCallback(marker, map, result);
         }
 
+
+        // Variable to disable click events on the map while the geocoder is active.
+        map._geocoderIsActive = false;
         geocoder.on('markgeocode', function(result) {
             this._map.fitBounds(result.geocode.bbox);
             setMarker(result.geocode);
+            // Set a delay to re-enable click events on the map.
+            window.setTimeout(function() { map._geocoderIsActive = false }, 500);
         });
-
+        geocoder.on('startgeocode', function() {
+            map._geocoderIsActive = true;
+        });
         map.on('click', function(e) {
+            if (map._geocoderIsActive) {
+                return;
+            }
             geocoder.options.geocoder.reverse(e.latlng, map.options.crs.scale(map.getZoom()), function(results) {
+                // Todo: Check if found result is close enough?
                 if (results[0]) {
                     setMarker(results[0])
                 }
-                // Todo: Handle case when nothing is found.
             })
         });
 
