@@ -12,27 +12,29 @@
 
         // Init geocoder.
         var geocodingQueryParams = {};
-        if (mapSettings.limitCountryCodes != '') {
+        if (mapSettings.limitCountryCodes != '' ||  mapSettings.limitCity != '' || mapSettings.limitViewbox != '' ) {
             geocodingQueryParams = {
                 'countrycodes' : mapSettings.limitCountryCodes,
                 'city' : mapSettings.limitCity,
-                'viewbox': '6.832,50.8464,6.937,50.8043'
-    
+                'viewbox': mapSettings.limitViewbox,
+                'bounded': 1
             };
         }
-        console.log(geocodingQueryParams);
+       
+        var geocoderNominatim = L.Control.Geocoder.nominatim({
+            // Todo: Make this an optional setting.
+            geocodingQueryParams: geocodingQueryParams,
+            reverseQueryParams: {
+                extratags: 1,
+                namedetails: 0,
+                addressdetails: 0
+            }
+        });
+        
         var geocoder = L.Control.geocoder({
             defaultMarkGeocode: false,
             collapsed: false,
-            geocoder: L.Control.Geocoder.Nominatim({
-                // Todo: Make this an optional setting.
-                geocodingQueryParams: geocodingQueryParams,
-                reverseQueryParams: {
-                    extratags: 1,
-                    namedetails: 1,
-                    addressdetails: 1
-                }
-            })
+            geocoder: geocoderNominatim
         });
 
         var marker;
