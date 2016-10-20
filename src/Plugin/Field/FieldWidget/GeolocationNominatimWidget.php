@@ -32,6 +32,9 @@ class GeolocationNominatimWidget extends WidgetBase {
       'center_lng' => 0,
       'set_address_field' => 0,
       'limit_countrycodes' => '',
+      'limit_city' => '',
+
+      'tileServerUrl' => 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
     ] + parent::defaultSettings();
   }
 
@@ -69,6 +72,12 @@ class GeolocationNominatimWidget extends WidgetBase {
       '#default_value' => $this->getSetting('limit_countrycodes'),
       '#description' => $this->t('Optionally enter a comma-seperated list 2-letter country codes to limit search results.')
     ];
+    $elements['limit_city'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Limit search results to a specific city'),
+      '#default_value' => $this->getSetting('limit_city'),
+      '#description' => $this->t('Optionally enter a specific city to limit search results.')
+    ];
     $elements['set_address_field'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Populate address field (experimental)'),
@@ -76,6 +85,13 @@ class GeolocationNominatimWidget extends WidgetBase {
       '#description' => $this->t('Experimental feature: Populate an address field with the geocoding results. This works only if the form has one field of type address (https://www.drupal.org/project/address) and might not cover all countries and circumnstances. NOTE: The address form fields will be populated even if they already contain default values. Use with care and not yet in production.')
     ];
 
+    $elements['tileServerUrl'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Default map tile server url'),
+      '#default_value' => $this->getSetting('tileServerUrl'),
+      '#description' => $this->t('Chose a tileserver url like "http://{s}.tile.osm.org/{z}/{x}/{y}.png".')
+
+    ];
 //    This somehow doesn't work, javascript error, seems a library isn't loaded.
 //    @todo: Fix this.
 //    $elements['map'] = [
@@ -163,6 +179,8 @@ class GeolocationNominatimWidget extends WidgetBase {
               'label' => $label,
               'setAddressField' => $this->getSetting('set_address_field'),
               'limitCountryCodes'  => $this->getSetting('limit_countrycodes'),
+              'limitCity'  => $this->getSetting('limit_city'),
+              'tileServerUrl'  => $this->getSetting('tileServerUrl'),
             ],
           ],
         ],

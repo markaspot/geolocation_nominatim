@@ -6,15 +6,21 @@
         }
         // Init map.
         var map = L.map(mapSettings.id).setView([mapSettings.centerLat, mapSettings.centerLng], mapSettings.zoom);
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        L.tileLayer(mapSettings.tileServerUrl, {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         // Init geocoder.
         var geocodingQueryParams = {};
         if (mapSettings.limitCountryCodes != '') {
-            geocodingQueryParams.countrycodes = mapSettings.limitCountryCodes;
+            geocodingQueryParams = {
+                'countrycodes' : mapSettings.limitCountryCodes,
+                'city' : mapSettings.limitCity,
+                'viewbox': '6.832,50.8464,6.937,50.8043'
+    
+            };
         }
+        console.log(geocodingQueryParams);
         var geocoder = L.Control.geocoder({
             defaultMarkGeocode: false,
             collapsed: false,
