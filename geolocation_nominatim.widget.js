@@ -12,10 +12,9 @@
 
         // Init geocoder.
         var geocodingQueryParams = {};
-        if (mapSettings.limitCountryCodes != '' ||  mapSettings.limitCity != '' || mapSettings.limitViewbox != '' ) {
+        if (mapSettings.limitCountryCodes != '' || mapSettings.limitViewbox != '' ) {
             geocodingQueryParams = {
                 'countrycodes' : mapSettings.limitCountryCodes,
-                'city' : mapSettings.limitCity,
                 'viewbox': mapSettings.limitViewbox,
                 'bounded': 1
             };

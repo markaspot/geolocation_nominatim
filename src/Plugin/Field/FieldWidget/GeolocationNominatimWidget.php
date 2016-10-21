@@ -32,7 +32,6 @@ class GeolocationNominatimWidget extends WidgetBase {
       'center_lng' => 0,
       'set_address_field' => 0,
       'limit_countrycodes' => '',
-      'limit_city' => '',
       'limit_viewbox' => '',
       'tileServerUrl' => 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
     ] + parent::defaultSettings();
@@ -71,12 +70,6 @@ class GeolocationNominatimWidget extends WidgetBase {
       '#title' => $this->t('Limit search results to one or more countries'),
       '#default_value' => $this->getSetting('limit_countrycodes'),
       '#description' => $this->t('Optionally enter a comma-seperated list 2-letter country codes to limit search results.')
-    ];
-    $elements['limit_city'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Limit search results to a specific city'),
-      '#default_value' => $this->getSetting('limit_city'),
-      '#description' => $this->t('Optionally enter a specific city to limit search results.')
     ];
     $elements['limit_viewbox'] = [
       '#type' => 'textfield',
@@ -185,7 +178,6 @@ class GeolocationNominatimWidget extends WidgetBase {
               'label' => $label,
               'setAddressField' => $this->getSetting('set_address_field'),
               'limitCountryCodes'  => $this->getSetting('limit_countrycodes'),
-              'limitCity'  => $this->getSetting('limit_city'),
               'limitViewbox'  => $this->getSetting('limit_viewbox'),
               'tileServerUrl'  => $this->getSetting('tileServerUrl'),
             ],
