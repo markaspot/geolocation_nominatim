@@ -44,7 +44,7 @@ class GeolocationNominatimWidget extends WidgetBase {
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $uniq_id = Html::getUniqueId('geolocation-nominatim-map');
     $elements = [];
-    for ($i = 0; $i <= 14; $i++) {
+    for ($i = 0; $i <= 18; $i++) {
       $zoom_options[$i] = $i;
     }
     $elements['zoom'] = [
