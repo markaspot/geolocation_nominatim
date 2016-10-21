@@ -27,7 +27,7 @@
             reverseQueryParams: {
                 extratags: 1,
                 namedetails: 0,
-                addressdetails: 0
+                addressdetails: 1
             }
         });
         
