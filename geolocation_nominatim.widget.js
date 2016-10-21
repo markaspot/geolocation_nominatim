@@ -124,8 +124,9 @@
         if ('postcode' in details) {
             $('input.postal-code', $address).val(details.postcode);
         }
-        if ('city' in details) {
-            $('input.locality', $address).val(details.city);
+        if ('city' in details || 'town' in details) {
+            var locality = details.city ? details.city : details.town;
+            $('input.locality', $address).val(locality);
         }
         if ('road' in details) {
             $('input.address-line1', $address).val(details.road);
