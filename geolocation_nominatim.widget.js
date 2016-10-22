@@ -37,17 +37,20 @@
         });
 
         var marker;
-
+    
         // Init default values.
         if (mapSettings.lat && mapSettings.lng) {
             var result = {
                 center: [mapSettings.lat, mapSettings.lng],
                 name: mapSettings.label
             };
-            setMarker(result);
+
+            var initLatLng = new L.latLng(mapSettings.lat, mapSettings.lng);
+            reverseGeocode(initLatLng);
+    
             map.setView([mapSettings.lat, mapSettings.lng], mapSettings.zoom);
         }
-
+    
         function setMarker(result) {
             if (marker) {
                 map.removeLayer(marker);
@@ -57,11 +60,13 @@
             }).bindPopup(result.html || result.name).addTo(map).openPopup();
             marker.on('dragend', function(e) {
                 updateCallback(marker, map, result);
+                reverseGeocode(e.target._latlng);
+            
             });
             updateCallback(marker, map, result);
         }
-
-
+    
+    
         // Variable to disable click events on the map while the geocoder is active.
         map._geocoderIsActive = false;
         geocoder.on('markgeocode', function(result) {
@@ -77,14 +82,16 @@
             if (map._geocoderIsActive) {
                 return;
             }
-            geocoder.options.geocoder.reverse(e.latlng, map.options.crs.scale(map.getZoom()), function(results) {
+            reverseGeocode(e.latlng);
+        });
+        function reverseGeocode(latlng) {
+            geocoder.options.geocoder.reverse(latlng, map.options.crs.scale(map.getZoom()), function(results) {
                 // Todo: Check if found result is close enough?
                 if (results[0]) {
                     setMarker(results[0])
                 }
-            })
-        });
-
+            });
+        }
         geocoder.addTo(map);
     };
 
