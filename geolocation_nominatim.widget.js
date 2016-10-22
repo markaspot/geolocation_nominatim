@@ -45,6 +45,9 @@
             if (marker) {
                 map.removeLayer(marker);
             }
+            // Reset possibly used address module inputs (on all events)
+            $('input.address-line1, input.address-line2, input.postal-code, input.locality').val('');
+            
             marker = L.marker(result.center, {
                 draggable: true
             }).bindPopup(result.html || result.name).addTo(map).openPopup();
@@ -116,11 +119,14 @@
         if ('postcode' in details) {
             $('input.postal-code', $address).val(details.postcode);
         }
-        if ('city' in details) {
-            $('input.locality', $address).val(details.city);
+        if ('city' in details || 'town' in details || 'village' in details || 'hamlet' in details) {
+            var localityType = details.city || details.town || details.village || details.hamlet;
+            $('input.locality', $address).val(localityType);
         }
-        if ('road' in details) {
-            $('input.address-line1', $address).val(details.road);
+        if ('road' in details || 'building' in details || 'footway' in details || 'pedestrian' in details) {
+            var streetType = details.road || details.footway || details.pedestrian;
+            $('input.address-line1', $address).val(streetType);
+            $('input.address-line2', $address).val(details.building);
         }
         if ('house_number' in details) {
             $('input.address-line1', $address).val($('input.address-line1', $address).val() + ' ' + details.house_number);
