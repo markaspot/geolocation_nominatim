@@ -47,7 +47,6 @@
             }
             // Reset possibly used address module inputs (on all events)
             $('input.address-line1, input.address-line2, input.postal-code, input.locality').val('');
-            
             marker = L.marker(result.center, {
                 draggable: true
             }).bindPopup(result.html || result.name).addTo(map).openPopup();
