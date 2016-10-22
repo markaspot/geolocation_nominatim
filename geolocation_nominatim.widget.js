@@ -132,15 +132,10 @@
         if ('postcode' in details) {
             $('input.postal-code', $address).val(details.postcode);
         }
-<<<<<<< HEAD
-        if ('city' in details || 'town' in details) {
-            var locality = details.city ? details.city : details.town;
-            $('input.locality', $address).val(locality);
-=======
+
         if ('city' in details || 'town' in details || 'village' in details || 'hamlet' in details) {
             var localityType = details.city || details.town || details.village || details.hamlet;
             $('input.locality', $address).val(localityType);
->>>>>>> use-more-details
         }
         if ('road' in details || 'building' in details || 'footway' in details || 'pedestrian' in details) {
             var streetType = details.road || details.footway || details.pedestrian;
