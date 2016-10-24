@@ -13,6 +13,13 @@
             'flyto': true
         };
         L.control.locate(locateOptions).addTo(map);
+        function onLocationFound(e) {
+            var radius = e.accuracy / 2;
+            L.circle(e.latlng, radius).addTo(map);
+            reverseGeocode(e.latlng);
+        }
+    
+        map.on('locationfound', onLocationFound);
 
         // Init geocoder.
         var geocodingQueryParams = {};
@@ -65,6 +72,7 @@
             marker = L.marker(result.center, {
                 draggable: true
             }).bindPopup(result.html || result.name).addTo(map).openPopup();
+            map.panTo(result.center);
             marker.on('dragend', function(e) {
                 updateCallback(marker, map, result);
                 reverseGeocode(e.target._latlng);
