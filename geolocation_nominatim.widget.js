@@ -9,6 +9,10 @@
         L.tileLayer(mapSettings.tileServerUrl, {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+        var locateOptions = {
+            'flyto': true
+        };
+        L.control.locate(locateOptions).addTo(map);
 
         // Init geocoder.
         var geocodingQueryParams = {};
@@ -16,7 +20,8 @@
             geocodingQueryParams = {
                 'countrycodes' : mapSettings.limitCountryCodes,
                 'viewbox': mapSettings.limitViewbox,
-                'bounded': 1
+                'bounded': 1,
+                'limit': 2
             };
         }
        
@@ -133,6 +138,14 @@
             $('input.postal-code', $address).val(details.postcode);
         }
 
+        if ('state' in details){
+            console.log(details.state);
+            $('select.administrative-area option').each(function() {
+                if($(this).text() == details.state) {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+        }
         if ('city' in details || 'town' in details || 'village' in details || 'hamlet' in details) {
             var localityType = details.city || details.town || details.village || details.hamlet;
             $('input.locality', $address).val(localityType);

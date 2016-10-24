@@ -164,7 +164,11 @@ class GeolocationNominatimWidget extends WidgetBase {
     }
 
     $element['#attached'] = [
-      'library' => ['geolocation_nominatim/geolocation-nominatim-widget'],
+      'library' => [
+        'geolocation_nominatim/leaflet',
+        'geolocation_nominatim/leaflet-locatecontrol',
+        'geolocation_nominatim/geolocation-nominatim-widget'
+      ],
       'drupalSettings' => [
         'geolocationNominatim' => [
           'widgetMaps' => [
