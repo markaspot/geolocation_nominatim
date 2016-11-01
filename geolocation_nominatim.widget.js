@@ -117,27 +117,30 @@
         var address = result.properties.address;
         var $form = $('.geolocation-widget-lat.for--' + mapSettings.id, context).parents('form');
         var $address = $form.find('.field--type-address').first();
-
-        // Bind to addressfields AJAX complete event.
-        $.each(Drupal.ajax.instances, function(idx, instance) {
-            // Todo: Simplyfy this check.
-            if (instance !== null && instance.hasOwnProperty('callback')
-                && instance.callback[0] == 'Drupal\\address\\Plugin\\Field\\FieldWidget\\AddressDefaultWidget'
-                && instance.callback[1] == 'ajaxRefresh') {
-                var originalSuccess= instance.options.success;
-                instance.options.success = function(response, status, xmlhttprequest) {
-                    originalSuccess(response, status, xmlhttprequest);
-                    var $addressNew = $form.find('.field--type-address').first();
-                    Drupal.geolocationNominatimSetAddressDetails($addressNew, address);
+        
+        // Take care if address field widget is not included in form due to field permissions or theme customization.
+        if ($address.length){
+            // Bind to addressfields AJAX complete event.
+            $.each(Drupal.ajax.instances, function(idx, instance) {
+                // Todo: Simplyfy this check.
+                if (instance !== null && instance.hasOwnProperty('callback')
+                    && instance.callback[0] == 'Drupal\\address\\Plugin\\Field\\FieldWidget\\AddressDefaultWidget'
+                    && instance.callback[1] == 'ajaxRefresh') {
+                    var originalSuccess= instance.options.success;
+                    instance.options.success = function(response, status, xmlhttprequest) {
+                        originalSuccess(response, status, xmlhttprequest);
+                        var $addressNew = $form.find('.field--type-address').first();
+                        Drupal.geolocationNominatimSetAddressDetails($addressNew, address);
+                    }
                 }
+            });
+    
+            if ($('select.country', $address).val().toLowerCase() != address.country_code) {
+                $('select.country', $address).val(address.country_code.toUpperCase()).trigger('change');
             }
-        });
-
-        if ($('select.country', $address).val().toLowerCase() != address.country_code) {
-            $('select.country', $address).val(address.country_code.toUpperCase()).trigger('change');
-        }
-        else {
-            Drupal.geolocationNominatimSetAddressDetails($address, address);
+            else {
+                Drupal.geolocationNominatimSetAddressDetails($address, address);
+            }
         }
     },
 
@@ -147,7 +150,6 @@
         }
 
         if ('state' in details){
-            console.log(details.state);
             $('select.administrative-area option').each(function() {
                 if($(this).text() == details.state) {
                     $(this).attr('selected', 'selected');
