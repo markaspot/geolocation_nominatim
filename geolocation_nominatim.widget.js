@@ -156,8 +156,8 @@
                 }
             });
         }
-        if ('city' in details || 'town' in details || 'village' in details || 'hamlet' in details) {
-            var localityType = details.city || details.town || details.village || details.hamlet;
+        if ('city' in details || 'town' in details || 'village' in details || 'hamlet' in details || 'county' in details || 'neighbourhood' in details) {
+            var localityType = details.city || details.town || details.village || details.hamlet || details.county || details.neighbourhood;
             $('input.locality', $address).val(localityType);
         }
         if ('road' in details || 'building' in details || 'footway' in details || 'pedestrian' in details) {
