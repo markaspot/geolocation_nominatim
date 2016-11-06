@@ -63,20 +63,24 @@
             map.setView([mapSettings.lat, mapSettings.lng], mapSettings.zoom);
         }
     
-        function setMarker(result) {
+        function setMarker(result, latLng) {
             if (marker) {
                 map.removeLayer(marker);
             }
             // Reset possibly used address module inputs (on all events)
             $('input.address-line1, input.address-line2, input.postal-code, input.locality').val('');
-            marker = L.marker(result.center, {
+            
+            // check if method is called with a pair of coordinates to prevent
+            // marker jumping to nominatm reverse results lat/lon.
+            latLng = latLng ? latLng : result.center;
+            
+            marker = L.marker(latLng, {
                 draggable: true
             }).bindPopup(result.html || result.name).addTo(map).openPopup();
             map.panTo(result.center);
             marker.on('dragend', function(e) {
                 updateCallback(marker, map, result);
-                reverseGeocode(e.target._latlng);
-            
+                reverseGeocode(e.target._latlng, marker);
             });
             updateCallback(marker, map, result);
         }
@@ -103,7 +107,7 @@
             geocoder.options.geocoder.reverse(latlng, map.options.crs.scale(map.getZoom()), function(results) {
                 // Todo: Check if found result is close enough?
                 if (results[0]) {
-                    setMarker(results[0])
+                    setMarker(results[0],latlng);
                 }
             });
         }
