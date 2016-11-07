@@ -77,7 +77,7 @@
             marker = L.marker(latLng, {
                 draggable: true
             }).bindPopup(result.html || result.name).addTo(map).openPopup();
-            map.panTo(result.center);
+            map.panTo(latLng);
             marker.on('dragend', function(e) {
                 updateCallback(marker, map, result);
                 reverseGeocode(e.target._latlng, marker);
@@ -107,7 +107,7 @@
             geocoder.options.geocoder.reverse(latlng, map.options.crs.scale(map.getZoom()), function(results) {
                 // Todo: Check if found result is close enough?
                 if (results[0]) {
-                    setMarker(results[0],latlng);
+                    setMarker(results[0], latlng);
                 }
             });
         }
