@@ -34,3 +34,9 @@ leaflet-locatecontrol:
   css:
     component:
       /libraries/leaflet-locatecontrol/dist/L.Control.Locate.min.css: {}
+leaflet.fullscreen:
+  js:
+    /libraries/Leaflet.fullscreen/dist/Leaflet.fullscreen.min.js: {}
+  css:
+    component:
+      /libraries/Leaflet.fullscreen/dist/leaflet.fullscreen.css: {}

@@ -5,7 +5,9 @@
             return;
         }
         // Init map.
-        var map = L.map(mapSettings.id).setView([mapSettings.centerLat, mapSettings.centerLng], mapSettings.zoom);
+        var map = L.map(mapSettings.id, {
+            fullscreenControl: true,
+        }).setView([mapSettings.centerLat, mapSettings.centerLng], mapSettings.zoom);
         L.tileLayer(mapSettings.tileServerUrl, {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
