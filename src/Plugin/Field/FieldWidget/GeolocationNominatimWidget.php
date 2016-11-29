@@ -32,6 +32,7 @@ class GeolocationNominatimWidget extends WidgetBase {
       'limit_countrycodes' => '',
       'limit_viewbox' => '',
       'tileServerUrl' => 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      'serviceUrl' => 'https://nominatim.openstreetmap.org/'
     ] + parent::defaultSettings();
   }
 
@@ -86,8 +87,13 @@ class GeolocationNominatimWidget extends WidgetBase {
       '#type' => 'textfield',
       '#title' => $this->t('Default map tile server url'),
       '#default_value' => $this->getSetting('tileServerUrl'),
-      '#description' => $this->t('Chose a tileserver url like "http://{s}.tile.osm.org/{z}/{x}/{y}.png".'),
-
+      '#description' => $this->t('Choose a tileserver url like "http://{s}.tile.osm.org/{z}/{x}/{y}.png".'),
+    ];
+    $elements['serviceUrl'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Geocoding service url'),
+      '#default_value' => $this->getSetting('serviceUrl'),
+      '#description' => $this->t('Choose url like "https://nominatim.openstreetmap.org/"'),
     ];
 
     return $elements;
@@ -161,6 +167,7 @@ class GeolocationNominatimWidget extends WidgetBase {
               'limitCountryCodes'  => $this->getSetting('limit_countrycodes'),
               'limitViewbox'  => $this->getSetting('limit_viewbox'),
               'tileServerUrl'  => $this->getSetting('tileServerUrl'),
+              'serviceUrl' => $this->getSetting('serviceUrl'),
             ],
           ],
         ],
@@ -171,3 +178,4 @@ class GeolocationNominatimWidget extends WidgetBase {
   }
 
 }
+

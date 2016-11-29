@@ -36,6 +36,7 @@
        
         var geocoderNominatim = L.Control.Geocoder.nominatim({
             // Todo: Make this an optional setting.
+            serviceUrl: mapSettings.serviceUrl,
             geocodingQueryParams: geocodingQueryParams,
             reverseQueryParams: {
                 extratags: 1,
@@ -43,7 +44,6 @@
                 addressdetails: 1
             }
         });
-        
         var geocoder = L.Control.geocoder({
             defaultMarkGeocode: false,
             collapsed: false,
@@ -79,7 +79,7 @@
             marker = L.marker(latLng, {
                 draggable: true
             }).bindPopup(result.html || result.name).addTo(map).openPopup();
-            map.panTo(latLng);
+            map.setView(latLng).setZoom(mapSettings.zoom);
             marker.on('dragend', function(e) {
                 updateCallback(marker, map, result);
                 reverseGeocode(e.target._latlng, marker);
@@ -193,3 +193,4 @@
         }
     }
 })(jQuery);
+
