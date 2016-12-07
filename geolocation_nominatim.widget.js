@@ -79,7 +79,7 @@
             marker = L.marker(latLng, {
                 draggable: true
             }).bindPopup(result.html || result.name).addTo(map).openPopup();
-            map.setView(latLng).setZoom(mapSettings.zoom);
+            // map.setView(latLng).setZoom(zoom);
             marker.on('dragend', function(e) {
                 updateCallback(marker, map, result);
                 reverseGeocode(e.target._latlng, marker);
@@ -92,7 +92,7 @@
         map._geocoderIsActive = false;
         geocoder.on('markgeocode', function(result) {
             this._map.fitBounds(result.geocode.bbox);
-            setMarker(result.geocode);
+            setMarker(result.geocode, result.geocode.center);
             // Set a delay to re-enable click events on the map.
             window.setTimeout(function() { map._geocoderIsActive = false }, 500);
         });
