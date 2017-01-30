@@ -10,10 +10,10 @@ geolocation-nominatim-widget:
 
 leaflet:
   js:
-    /libraries/Leaflet/dist/leaflet.js: {}
+    /libraries/leaflet/dist/leaflet.js: {}
   css:
     component:
-      /libraries/Leaflet/dist/leaflet.css: {}
+      /libraries/leaflet/dist/leaflet.css: {}
 
 leaflet-control-geocoder:
   remote: https://github.com/perliedman/leaflet-control-geocoder
@@ -36,7 +36,7 @@ leaflet-locatecontrol:
       /libraries/leaflet-locatecontrol/dist/L.Control.Locate.min.css: {}
 leaflet.fullscreen:
   js:
-    /libraries/Leaflet.fullscreen/dist/Leaflet.fullscreen.min.js: {}
+    /libraries/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js: {}
   css:
     component:
-      /libraries/Leaflet.fullscreen/dist/leaflet.fullscreen.css: {}
+      /libraries/leaflet-fullscreen/dist/leaflet.fullscreen.css: {}
