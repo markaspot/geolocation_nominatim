@@ -10,5 +10,38 @@
     "issues": "https://www.drupal.org/project/issues/geolocation_nominatim",
     "source": "https://github.com/markaspot/geolocation_nominatim"
   },
-  "require": { }
+  "require": {
+    "domoritz/leaflet-locatecontrol": "0.55.0",
+    "perliedman/leaflet-control-geocoder": "1.5.3"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "perliedman/leaflet-control-geocoder",
+        "version": "1.5.3",
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/perliedman/leaflet-control-geocoder/archive/v1.5.3.zip"
+        },
+        "type": "drupal-library"
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "domoritz/leaflet-locatecontrol",
+        "version": "0.55.0",
+        "type": "drupal-library",
+        "dist": {
+          "url": "https://github.com/domoritz/leaflet-locatecontrol/archive/v0.55.0.zip",
+          "type": "zip"
+        }
+      }
+    }
+  ]
 }
