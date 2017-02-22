@@ -83,7 +83,6 @@
       if (marker) {
         map.removeLayer(marker);
       }
-      console.log(result);
       // Reset possibly used address module inputs (on all events)
       $('input.address-line1, input.address-line2, input.postal-code, input.locality')
         .val('');
@@ -123,7 +122,6 @@
       reverseGeocode(e.latlng);
     });
     function reverseGeocode(latlng) {
-      console.log(latlng);
       geocoder.options.geocoder.reverse(latlng, map.options.crs.scale(map.getZoom()), function (results) {
         // Todo: Check if found result is close enough?
         if (results[0]) {
