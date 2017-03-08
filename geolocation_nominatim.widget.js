@@ -20,7 +20,17 @@
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
     var locateOptions = {
-      'flyto': true
+      flyto: true,
+      drawCircle: false,
+      circleStyle: {
+        color: '#136AEC',
+        fillColor: '#136AEC',
+        fillOpacity: 0.1,
+        weight: 0.1,
+        opacity: 0.2
+      },
+      drawMarker: false,
+      position: 'bottomright'
     };
     L.control.locate(locateOptions).addTo(map);
     function onLocationFound(e) {

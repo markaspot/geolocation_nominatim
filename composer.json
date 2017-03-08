@@ -11,7 +11,7 @@
     "source": "https://github.com/markaspot/geolocation_nominatim"
   },
   "require": {
-    "domoritz/leaflet-locatecontrol": "0.55.0",
+    "domoritz/leaflet-locatecontrol": "0.60.0",
     "perliedman/leaflet-control-geocoder": "1.5.3"
   },
   "repositories": [
@@ -35,10 +35,10 @@
       "type": "package",
       "package": {
         "name": "domoritz/leaflet-locatecontrol",
-        "version": "0.55.0",
+        "version": "0.60.0",
         "type": "drupal-library",
         "dist": {
-          "url": "https://github.com/domoritz/leaflet-locatecontrol/archive/v0.55.0.zip",
+          "url": "https://github.com/domoritz/leaflet-locatecontrol/archive/v0.60.0.zip",
           "type": "zip"
         }
       }
