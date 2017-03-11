@@ -173,7 +173,11 @@ class GeolocationNominatimWidget extends WidgetBase {
         ],
       ],
     ];
-
+    // Wrap the whole form in a container.
+    $element += [
+      '#type' => 'item',
+      '#title' => $element['#title'],
+    ];
     return $element;
   }
 
