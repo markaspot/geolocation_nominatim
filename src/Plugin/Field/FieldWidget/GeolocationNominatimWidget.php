@@ -32,7 +32,8 @@ class GeolocationNominatimWidget extends WidgetBase {
       'limit_countrycodes' => '',
       'limit_viewbox' => '',
       'tileServerUrl' => 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      'serviceUrl' => 'https://nominatim.openstreetmap.org/'
+      'autoLocate' => FALSE,
+      'serviceUrl' => 'https://nominatim.openstreetmap.org/',
     ] + parent::defaultSettings();
   }
 
@@ -95,7 +96,12 @@ class GeolocationNominatimWidget extends WidgetBase {
       '#default_value' => $this->getSetting('serviceUrl'),
       '#description' => $this->t('Choose url like "https://nominatim.openstreetmap.org/"'),
     ];
-
+    $elements['autoLocate'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Autolocate user'),
+      '#description' => $this->t('Autolocate the user via GPS on widget display?'),
+      '#default_value' => $this->getSetting('autoLocate'),
+    ];
     return $elements;
   }
 
@@ -167,6 +173,7 @@ class GeolocationNominatimWidget extends WidgetBase {
               'limitCountryCodes'  => $this->getSetting('limit_countrycodes'),
               'limitViewbox'  => $this->getSetting('limit_viewbox'),
               'tileServerUrl'  => $this->getSetting('tileServerUrl'),
+              'autoLocate' => $this->getSetting('autoLocate'),
               'serviceUrl' => $this->getSetting('serviceUrl'),
             ],
           ],
@@ -182,4 +189,3 @@ class GeolocationNominatimWidget extends WidgetBase {
   }
 
 }
-

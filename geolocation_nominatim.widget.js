@@ -23,6 +23,10 @@
       position: 'bottomright'
     };
     var lc = L.control.locate(locateOptions).addTo(map);
+    if (mapSettings.autoLocate) {
+      lc.start();
+    }
+
     function onLocationFound(e) {
       reverseGeocode(e.latlng);
     }
