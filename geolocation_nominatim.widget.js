@@ -65,7 +65,9 @@
     var geocoder = L.Control.geocoder({
       defaultMarkGeocode: false,
       collapsed: false,
-      geocoder: geocoderNominatim
+      geocoder: geocoderNominatim,
+      placeholder: Drupal.t('Search'),
+      errorMessage: Drupal.t('Nothing found.')
     });
 
     var marker;
