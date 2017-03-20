@@ -23,7 +23,9 @@
       position: 'bottomright'
     };
     var lc = L.control.locate(locateOptions).addTo(map);
-    if (mapSettings.autoLocate) {
+    
+    // Check for ongoing validation and autolocate settings combination.
+    if (mapSettings.autoLocate && !$('.messages')[0]) {
       lc.start();
     }
 
