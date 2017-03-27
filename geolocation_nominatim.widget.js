@@ -30,6 +30,7 @@
     }
 
     function onLocationFound(e) {
+      map.stopLocate();
       reverseGeocode(e.latlng);
     }
 
