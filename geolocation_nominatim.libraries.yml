@@ -30,10 +30,10 @@ leaflet-control-geocoder:
 
 leaflet-locatecontrol:
   js:
-    /libraries/leaflet-locatecontrol/dist/L.Control.Locate.min.js: {}
+    /libraries/leaflet.locatecontrol/dist/L.Control.Locate.min.js: {}
   css:
     component:
-      /libraries/leaflet-locatecontrol/dist/L.Control.Locate.min.css: {}
+      /libraries/leaflet.locatecontrol/dist/L.Control.Locate.min.css: {}
 leaflet.fullscreen:
   js:
     /libraries/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js: {}
