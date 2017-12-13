@@ -23,7 +23,7 @@
       position: 'bottomright'
     };
     var lc = L.control.locate(locateOptions).addTo(map);
-    
+
     // Check for ongoing validation and autolocate settings combination.
     if (mapSettings.autoLocate && !$('.messages')[0]) {
       lc.start();
@@ -165,9 +165,10 @@
     if ($address.length) {
       // Bind to addressfields AJAX complete event.
       $.each(Drupal.ajax.instances, function (idx, instance) {
+
         // Todo: Simplyfy this check.
         if (instance !== null && instance.hasOwnProperty('callback')
-          && instance.callback[0] == 'Drupal\\address\\Plugin\\Field\\FieldWidget\\AddressDefaultWidget'
+          && instance.callback[0] == 'Drupal\\address\\Element\\Address'
           && instance.callback[1] == 'ajaxRefresh') {
           var originalSuccess = instance.options.success;
           instance.options.success = function (response, status, xmlhttprequest) {
@@ -215,7 +216,7 @@
       if ('house_number' in details) {
         $('input.address-line1', $address)
           .val($('input.address-line1', $address)
-              .val() + ' ' + details.house_number);
+            .val() + ' ' + details.house_number);
       }
     },
 
