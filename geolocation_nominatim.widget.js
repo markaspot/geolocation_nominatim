@@ -15,7 +15,7 @@
       .setView([
         mapSettings.centerLat,
         mapSettings.centerLng
-      ], mapSettings.zoom);
+      ], 18);
     L.tileLayer(mapSettings.tileServerUrl, {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -96,9 +96,6 @@
       if (marker) {
         map.removeLayer(marker);
       }
-      // Reset possibly used address module inputs (on all events)
-      $('input.address-line1, input.address-line2, input.postal-code, input.locality')
-        .val('');
 
       // Check if method is called with a pair of coordinates to prevent
       // marker jumping to nominatm reverse results lat/lon.
